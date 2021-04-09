@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,11 +19,11 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class Work extends JFrame {
 
-	private WorkEvt we;
 	private JTextArea jta;
 	private JButton jbtnTset;
 	private JButton jbtnCset;
 	private JButton jbtnCreate;
+	private JButton jbtnClear;
 	private JTextField jtfTname;
 	private JTextField jtfCname;
 	private JTextField jtfPre;
@@ -30,6 +31,7 @@ public class Work extends JFrame {
 	private JComboBox<String> jcb;
 	private JCheckBox jchkp;
 	private JCheckBox jchkn;
+	private ButtonGroup bg;
 
 	public Work() {
 		super("테이블 생성");
@@ -37,16 +39,21 @@ public class Work extends JFrame {
 		setSize(700, 500);
 		setLocationRelativeTo(null);
 
-		FlowLayout fl = new FlowLayout(FlowLayout.LEFT);
+		String[] typeArr = { "NUMBER", "CHAR", "VARCHAR2", "DATE" };
+
+		FlowLayout flL = new FlowLayout(FlowLayout.LEFT);
+		FlowLayout flR = new FlowLayout(FlowLayout.RIGHT);
 		JPanel[] jpIn = new JPanel[3];
 		JPanel jpInfo = new JPanel();
 		JPanel jp = new JPanel();
+		bg = new ButtonGroup();
+		
 
 		jpInfo.setLayout(new GridLayout(jpIn.length, 1));
-		jp.setLayout(fl);
+		jp.setLayout(flR);
 		for (int i = 0; i < jpIn.length; i++) {
 			jpIn[i] = new JPanel();
-			jpIn[i].setLayout(fl);
+			jpIn[i].setLayout(flL);
 		}
 
 		JLabel jlt = new JLabel("테이블명 : ");
@@ -57,8 +64,9 @@ public class Work extends JFrame {
 		JLabel jln = new JLabel("Not Null");
 
 		jbtnTset = new JButton("설정");
-		jbtnCset = new JButton("설정");
+		jbtnCset = new JButton("추가");
 		jbtnCreate = new JButton("생성");
+		jbtnClear = new JButton("초기화");
 		jtfTname = new JTextField();
 		jtfCname = new JTextField();
 		jtfPre = new JTextField();
@@ -71,9 +79,14 @@ public class Work extends JFrame {
 		jta.setEditable(false);
 
 		dcbm = new DefaultComboBoxModel<String>();
-		jcb = new JComboBox<String>();
+		for (int i = 0; i < typeArr.length; i++) {
+			dcbm.addElement(typeArr[i]);
+		}
+		jcb = new JComboBox<String>(dcbm);
 		jchkp = new JCheckBox();
 		jchkn = new JCheckBox();
+		bg.add(jchkn);
+		bg.add(jchkp);
 
 		jpIn[0].add(Box.createHorizontalStrut(10));
 		jpIn[0].add(jlt);
@@ -111,6 +124,7 @@ public class Work extends JFrame {
 		jpInfo.add(jpIn[1]);
 		jpInfo.add(jpIn[2]);
 
+		jp.add(jbtnClear);
 		jp.add(jbtnCreate);
 
 		this.add(jpInfo, BorderLayout.NORTH);
@@ -122,7 +136,113 @@ public class Work extends JFrame {
 		setVisible(true);
 	}
 
+	public ButtonGroup getBg() {
+		return bg;
+	}
+
+	public void setBg(ButtonGroup bg) {
+		this.bg = bg;
+	}
+
+	public JButton getJbtnClear() {
+		return jbtnClear;
+	}
+
+	public void setJbtnClear(JButton jbtnClear) {
+		this.jbtnClear = jbtnClear;
+	}
+
+	public JTextArea getJta() {
+		return jta;
+	}
+
+	public void setJta(JTextArea jta) {
+		this.jta = jta;
+	}
+
+	public JButton getJbtnTset() {
+		return jbtnTset;
+	}
+
+	public void setJbtnTset(JButton jbtnTset) {
+		this.jbtnTset = jbtnTset;
+	}
+
+	public JButton getJbtnCset() {
+		return jbtnCset;
+	}
+
+	public void setJbtnCset(JButton jbtnCset) {
+		this.jbtnCset = jbtnCset;
+	}
+
+	public JButton getJbtnCreate() {
+		return jbtnCreate;
+	}
+
+	public void setJbtnCreate(JButton jbtnCreate) {
+		this.jbtnCreate = jbtnCreate;
+	}
+
+	public JTextField getJtfTname() {
+		return jtfTname;
+	}
+
+	public void setJtfTname(JTextField jtfTname) {
+		this.jtfTname = jtfTname;
+	}
+
+	public JTextField getJtfCname() {
+		return jtfCname;
+	}
+
+	public void setJtfCname(JTextField jtfCname) {
+		this.jtfCname = jtfCname;
+	}
+
+	public JTextField getJtfPre() {
+		return jtfPre;
+	}
+
+	public void setJtfPre(JTextField jtfPre) {
+		this.jtfPre = jtfPre;
+	}
+
+	public DefaultComboBoxModel<String> getDcbm() {
+		return dcbm;
+	}
+
+	public void setDcbm(DefaultComboBoxModel<String> dcbm) {
+		this.dcbm = dcbm;
+	}
+
+	public JComboBox<String> getJcb() {
+		return jcb;
+	}
+
+	public void setJcb(JComboBox<String> jcb) {
+		this.jcb = jcb;
+	}
+
+	public JCheckBox getJchkp() {
+		return jchkp;
+	}
+
+	public void setJchkp(JCheckBox jchkp) {
+		this.jchkp = jchkp;
+	}
+
+	public JCheckBox getJchkn() {
+		return jchkn;
+	}
+
+	public void setJchkn(JCheckBox jchkn) {
+		this.jchkn = jchkn;
+	}
+
 	public static void main(String[] args) {
-		new Work();
+		Work w = new Work();
+		new WorkEvt(w);
+
 	}
 }
